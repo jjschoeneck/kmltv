@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>KML Gym</title>
+<style>
+body {
+margin: 0px;
+}
+
+#logo {
+opacity: 0.5;
+width: 254px;
+height: 202px;
+background-color: black;
+border: solid transparent 5px;
+position: fixed;
+top: 10px;
+left: 10px;
+display: flex;
+}
+
+#time {
+opacity: 0.5;
+width: 620px;
+height: 232px;
+background-color: black;
+border: solid transparent 5px;
+position: fixed;
+top: 0px;
+left: 650px;
+text-align: center;
+line-height: 232px;
+font-family: Arial;
+font-size: 232px;
+color: white;
+}
+
+#video {
+position: fixed;
+top: 0px;
+left: 0px;
+z-index: -1;
+}
+
+#logo_img {
+    width: 254px;
+    height: 202px;
+    margin: auto;
+}
+
+</style>
+
+<script>
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+	var ampm = 'AM'
+	if (h >= 12) {
+		ampm = 'PM';
+		}
+		else {
+		ampm = 'AM';
+		}
+	if (h > 12) {
+		h = h - 12;
+		}
+	if (h == 0) {
+		h = 12;
+		}	
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('time').innerHTML = h + ':' + m + '<span style="font-size:40%">' + ampm + '</span>';
+    var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+
+function reloadFrame() {
+	var iFrame = document.getElementById('main_presentation');
+	iFrame.parentNode.replaceChild(iFrame.cloneNode(), iFrame);
+	setTimeout(reloadFrame, 60000);
+}
+</script>
+</head>
+<body style="background-color:#000000;" onload="startTime()">
+<div id="logo"><img src="PO1-White.png" id="logo_img"></div>
+<div id="time">
+</div>
+<video id="video" width="1920" height="1080" autoplay unmuted>
+ <source src="http://10.1.151.60:1234/stream" type="video/ogg">
+</video>
+</body>
+<!--
+vlc.exe rtsp://kettle2:kettle2@10.1.91.8:2525/ :network-caching=1000 :sout=#transcode{vcodec=theo,vb=1600,scale=1,acodec=vorb,ab=160,channels=2,samplerate=44100}:http{mux=ogg,dst=:1234/stream} :no-sout-rtp-sap :no-sout-standard-sap :sout-keep
+-->
+</html>
