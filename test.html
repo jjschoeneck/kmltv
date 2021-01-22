@@ -23,8 +23,8 @@ iframe {
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get('id');
-document.write(id);
+document.getElementById('info').innerHTML = id;
 </script>
-2
+  2 - <span id="info"></span>
 </body>
 </html>
