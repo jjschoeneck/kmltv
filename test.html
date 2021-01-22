@@ -16,22 +16,26 @@ iframe {
   border: 0;
 }
 </style>
+
+<script>
+function start() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = urlParams.get('id');
+  document.getElementById('info').innerHTML = id;
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById('iframe1').src = this.responseText;
+    }
+  };
+  xhttp.open("GET", "https://script.google.com/macros/s/AKfycbyVzNILJiFIs5g9GHUfQLG9q0b3j8cxJydi8aYzpwXY5lhY99JO/exec?display_id="+id, true);
+  xhttp.send();    
+}
+window.onload = start();
+</script>  
 </head>
-<body>
+<body >
   <iframe id='iframe1'></iframe>
-  <script>
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-const id = urlParams.get('id');
-document.getElementById('info').innerHTML = id;
-xhttp.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-    document.getElementById('iframe1').src = this.responseText;
-  }
-};
-xhttp.open("GET", "https://script.google.com/macros/s/AKfycbyVzNILJiFIs5g9GHUfQLG9q0b3j8cxJydi8aYzpwXY5lhY99JO/exec?display_id="+id, true);
-xhttp.send();    
-</script>
-  4 - <span id="info"></span>
+  5 - <span id="info"></span>
 </body>
 </html>
