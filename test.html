@@ -23,6 +23,7 @@ function start() {
   const urlParams = new URLSearchParams(queryString);
   const id = urlParams.get('id');
   document.getElementById('info').innerHTML = id;
+  var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       document.getElementById('iframe1').src = this.responseText;
@@ -31,11 +32,11 @@ function start() {
   xhttp.open("GET", "https://script.google.com/macros/s/AKfycbyVzNILJiFIs5g9GHUfQLG9q0b3j8cxJydi8aYzpwXY5lhY99JO/exec?display_id="+id, true);
   xhttp.send();    
 }
-window.addEventListener("load", start());
 </script>  
 </head>
 <body>
   <iframe id='iframe1'></iframe>
   6 - <span id="info"></span>
+  <script>start()</script>
 </body>
 </html>
