@@ -7,5 +7,17 @@
 
 <h1>KML Hall Display</h1>
 
+
+<p id="demo">Fetch</p>
+<script>
+    getFile("https://jjschoeneck.github.io/kmltv/display.html");
+    
+    async function getFile(file) {
+      let myObject = await fetch(file, {method: "HEAD"});
+      let myText = await myObject.headers.get('Last-Modified')
+      document.getElementById("demo").innerHTML = myText;
+    }
+    </script>
+
 </body>
 </html>
