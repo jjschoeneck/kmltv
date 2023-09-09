@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>KML Display</title>
+<style>
+body {
+margin: 0px;
+}
+
+#logo {
+width: 254px;
+height: 202px;
+background-color: transparent;
+border: solid transparent 5px;
+position: fixed;
+top: 10px;
+left: 10px;
+display: flex;
+}
+
+#time {
+width: 620px;
+height: 232px;
+background-color: transparent;
+border: solid transparent 5px;
+position: fixed;
+top: 0px;
+left: 650px;
+text-align: center;
+line-height: 232px;
+font-family: Arial;
+font-size: 232px;
+color: white;
+}
+
+#main {
+width: 1874px;
+height: 828px;
+background-color: white;
+border: solid black 5px;
+position: fixed;
+top: 227px;
+left: 18px;
+text-align: center;
+vertical-align: middle;
+overflow: hidden
+}
+
+#logo_img {
+    // width: 254px;
+    height: 202px;
+    margin: auto;
+}
+
+</style>
+
+<script>
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+	var ampm = 'AM'
+	if (h >= 12) {
+		ampm = 'PM';
+		}
+		else {
+		ampm = 'AM';
+		}
+	if (h > 12) {
+		h = h - 12;
+		}
+	if (h == 0) {
+		h = 12;
+		}	
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('time').innerHTML = h + ':' + m + '<span style="font-size:40%">' + ampm + '</span>';
+    var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+
+function reloadFrame() {
+	var iFrame = document.getElementById('main_presentation');
+	iFrame.parentNode.replaceChild(iFrame.cloneNode(), iFrame);
+	setTimeout(reloadFrame, 60000);
+}
+</script>
+<script>
+        function getIframeContent(frameID) {
+            var frameObj = 
+                document.getElementById(frameID);
+            var frameContent = frameObj
+                .contentWindow.document.body.innerHTML;
+  
+            console.log("frame content : " + frameContent);
+        }
+</script>
+
+</head>
+<body style="background-color:#00703c;" onload="startTime()">
+<div id="logo"><img src="lgt.png" id="logo_img"></div>
+<div id="time">
+</div>
+<div id="main">
+<iframe id="main_presentation" src="https://docs.google.com/presentation/d/1XFYWCGs40zSNorJnhjkM0ptBagFjUtmYkf4ftJIS2Cc/embed?start=true&loop=false&delayms=10000" frameborder="0" width="1874" height="864"></iframe>
+<script>
+setTimeout(reloadFrame, 60000);
+</script>
+
+</div>
+<div id="boundary"></div>
+<div id="special"></div>
+</body>
+</html>
