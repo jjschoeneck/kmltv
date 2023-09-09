@@ -106,7 +106,7 @@ function reloadFrame() {
 <div id="time">
 </div>
 <div id="main">
-<iframe id="main_presentation" src="https://docs.google.com/presentation/d/1XFYWCGs40zSNorJnhjkM0ptBagFjUtmYkf4ftJIS2Cc/embed?start=true&loop=false&delayms=10000" frameborder="0" width="1874" height="864"></iframe>
+<iframe id="main_presentation" src="" frameborder="0" width="1874" height="864"></iframe>
 <script>
 setTimeout(reloadFrame, 60000);
 </script>
@@ -114,5 +114,22 @@ setTimeout(reloadFrame, 60000);
 </div>
 <div id="boundary"></div>
 <div id="special"></div>
+<script type="text/javascript">
+     function newSrc() {
+      var e = document.getElementById("MySelectMenu");
+      var newSrc = e.options[e.selectedIndex].value;
+      document.getElementById("main_presentation").src=newSrc;
+     }
+</script>	
+<select id="MySelectMenu">
+     <option value="https://docs.google.com/presentation/d/1XFYWCGs40zSNorJnhjkM0ptBagFjUtmYkf4ftJIS2Cc/embed?slide=g1f14a66e013_0_5">1</option>
+     <option value="https://docs.google.com/presentation/d/1XFYWCGs40zSNorJnhjkM0ptBagFjUtmYkf4ftJIS2Cc/embed?slide=g23c119c46b8_0_0">2</option>
+     <option value="https://docs.google.com/presentation/d/1XFYWCGs40zSNorJnhjkM0ptBagFjUtmYkf4ftJIS2Cc/embed?slide=g1eda477d3ca_2_70">3</option>
+     <option value="https://docs.google.com/presentation/d/1XFYWCGs40zSNorJnhjkM0ptBagFjUtmYkf4ftJIS2Cc/embed?slide=g15aaebc856f_0_0">4</option>
+     <option value="https://docs.google.com/presentation/d/1XFYWCGs40zSNorJnhjkM0ptBagFjUtmYkf4ftJIS2Cc/embed?slide=g277cda81d2e_8_1">5</option>
+     <option value="https://docs.google.com/presentation/d/1XFYWCGs40zSNorJnhjkM0ptBagFjUtmYkf4ftJIS2Cc/embed?slide=g2799495be33_1_0">6</option>
+</select>
+    <button onClick="newSrc();">Change Iframe Src</button>
+
 </body>
 </html>
