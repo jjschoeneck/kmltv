@@ -125,21 +125,34 @@ function checkTime(i) {
 
 
 function loadTime() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-     var times = this.responseText.split(',');
-     ch1 = parseInt(times[0]);
-     cm1 = parseInt(times[1]);
-     cs1 = parseInt(times[2]);
-     ch2 = parseInt(times[3]);
-     cm2 = parseInt(times[4]);
-     cs2 = parseInt(times[5]);
-    }
-  };
-  xhttp.open("GET", "https://script.google.com/macros/s/AKfycbxMVy9UbQ4wdb7HyTWNj_JecCIXmkOk9H-N9cHvEIHNIpQ28Jcg/exec", true);
-  xhttp.send();
-  setTimeout(loadTime, 6000);
+  const url = "https://script.google.com/macros/s/AKfycbxMVy9UbQ4wdb7HyTWNj_JecCIXmkOk9H-N9cHvEIHNIpQ28Jcg/exec";
+
+  fetch(url, { redirect: "follow" }) // "follow" explicitly tells the browser to follow Google's 302 redirect
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text();
+    })
+    .then(data => {
+      var times = data.split(',');
+      if (times.length >= 6) {
+        ch1 = parseInt(times[0]);
+        cm1 = parseInt(times[1]);
+        cs1 = parseInt(times[2]);
+        ch2 = parseInt(times[3]);
+        cm2 = parseInt(times[4]);
+        cs2 = parseInt(times[5]);
+      }
+    })
+    .catch(error => {
+      console.error("Failed to fetch time data:", error);
+    })
+    .finally(() => {
+      // Ensure the timeout loops even if the fetch fails, 
+      // preventing the clock from permanently breaking on a network blip.
+      setTimeout(loadTime, 6000); 
+    });
 }
 </script>
 
