@@ -51,7 +51,7 @@ z-index: 10;
 </style>
 
 <script>
-console.log("v1.1");
+console.log("v1.2");
 	
     var ch1 = 9;
     var cm1 = 15;
@@ -145,6 +145,8 @@ function loadTime() {
         ch2 = parseInt(times[3]);
         cm2 = parseInt(times[4]);
         cs2 = parseInt(times[5]);
+		console.log("Start Time: "+ch1+":"+cm1+":"+cs1);
+		console.log("End Time: "+ch2+":"+cm2+":"+cs2);
       }
     })
     .catch(error => {
